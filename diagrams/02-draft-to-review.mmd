@@ -1,0 +1,25 @@
+sequenceDiagram
+    autonumber
+    participant U as 发起人
+    participant F as 前端入口
+    participant R as Agent运行时
+    participant M as 模型服务
+    participant G as 工具网关
+    participant D as 草稿存储/复核队列
+    participant A as 审计记录器
+
+    U->>F: 生成客服回复草稿
+    F->>R: 发起运行(身份/org_id/site_id)
+    R->>M: 规划
+    M-->>R: tool_call: reply_draft_write
+    R->>G: dispatch(draft_write)
+    Note over G: 校验白名单 / 输入Schema / 草稿权限
+    G->>D: 写入草稿(target=review_queue)
+    D-->>G: draft_id=RQ-DEMO-0008
+    G-->>R: OK(仅草稿，未改线上可见内容)
+    R->>A: 记step: side_effect=draft_write
+    R->>M: 生成回答
+    M-->>R: 草稿已生成
+    R->>A: 记run结束
+    R-->>F: 草稿待复核
+    F-->>U: 已入复核队列

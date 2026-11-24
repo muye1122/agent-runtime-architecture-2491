@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="620" viewBox="0 0 1440 620" font-family="Microsoft YaHei, SimSun, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2937"/>
+    </marker>
+    <marker id="arrowdash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1440" height="620" fill="#ffffff"/>
+  <text x="720" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">时序图二：草稿生成进复核队列（draft_write）</text>
+  <rect x="15.0" y="50" width="150" height="38" rx="6" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="90.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">发起人</text>
+  <line x1="90.0" y1="88" x2="90.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <rect x="220.0" y="50" width="150" height="38" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="295.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">前端入口</text>
+  <line x1="295.0" y1="88" x2="295.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <rect x="425.0" y="50" width="150" height="38" rx="6" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="500.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">Agent运行时</text>
+  <line x1="500.0" y1="88" x2="500.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <rect x="630.0" y="50" width="150" height="38" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="705.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">模型服务</text>
+  <line x1="705.0" y1="88" x2="705.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <rect x="835.0" y="50" width="150" height="38" rx="6" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="910.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">工具网关</text>
+  <line x1="910.0" y1="88" x2="910.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <rect x="1040.0" y="50" width="150" height="38" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="1115.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">草稿存储/复核队列</text>
+  <line x1="1115.0" y1="88" x2="1115.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <rect x="1245.0" y="50" width="150" height="38" rx="6" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <text x="1320.0" y="75" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">审计记录器</text>
+  <line x1="1320.0" y1="88" x2="1320.0" y2="594" stroke="#9ca3af" stroke-width="1" stroke-dasharray="5 5"/>
+  <line x1="90.0" y1="122" x2="295.0" y2="122" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="192.5" y="116" text-anchor="middle" font-size="12" fill="#111827">1. 生成客服回复草稿</text>
+  <line x1="295.0" y1="152" x2="500.0" y2="152" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="397.5" y="146" text-anchor="middle" font-size="12" fill="#111827">2. 发起运行(身份/org_id/site_id)</text>
+  <line x1="500.0" y1="182" x2="705.0" y2="182" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="602.5" y="176" text-anchor="middle" font-size="12" fill="#111827">3. 规划</text>
+  <line x1="705.0" y1="212" x2="500.0" y2="212" stroke="#6b7280" stroke-width="1.6" marker-end="url(#arrowdash)" stroke-dasharray="6 4"/>
+  <text x="602.5" y="206" text-anchor="middle" font-size="12" fill="#111827">4. tool_call: reply_draft_write</text>
+  <line x1="500.0" y1="242" x2="910.0" y2="242" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="705.0" y="236" text-anchor="middle" font-size="12" fill="#111827">5. dispatch(draft_write)</text>
+  <path d="M 910.0 264 L 944.0 264 L 944.0 280 L 912.0 280" fill="none" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="950.0" y="260" font-size="12" fill="#111827">6. 校验白名单/Schema/草稿权限</text>
+  <line x1="910.0" y1="302" x2="1115.0" y2="302" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="1012.5" y="296" text-anchor="middle" font-size="12" fill="#111827">7. 写入草稿(target=review_queue)</text>
+  <line x1="1115.0" y1="332" x2="910.0" y2="332" stroke="#6b7280" stroke-width="1.6" marker-end="url(#arrowdash)" stroke-dasharray="6 4"/>
+  <text x="1012.5" y="326" text-anchor="middle" font-size="12" fill="#111827">8. draft_id=RQ-DEMO-0008</text>
+  <line x1="910.0" y1="362" x2="500.0" y2="362" stroke="#6b7280" stroke-width="1.6" marker-end="url(#arrowdash)" stroke-dasharray="6 4"/>
+  <text x="705.0" y="356" text-anchor="middle" font-size="12" fill="#111827">9. OK(仅草稿，未改线上)</text>
+  <line x1="500.0" y1="392" x2="1320.0" y2="392" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="910.0" y="386" text-anchor="middle" font-size="12" fill="#111827">10. 记step: side_effect=draft_write</text>
+  <line x1="500.0" y1="422" x2="705.0" y2="422" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="602.5" y="416" text-anchor="middle" font-size="12" fill="#111827">11. 生成回答</text>
+  <line x1="705.0" y1="452" x2="500.0" y2="452" stroke="#6b7280" stroke-width="1.6" marker-end="url(#arrowdash)" stroke-dasharray="6 4"/>
+  <text x="602.5" y="446" text-anchor="middle" font-size="12" fill="#111827">12. 草稿已生成</text>
+  <line x1="500.0" y1="482" x2="1320.0" y2="482" stroke="#1f2937" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="910.0" y="476" text-anchor="middle" font-size="12" fill="#111827">13. 记run结束</text>
+  <line x1="500.0" y1="512" x2="295.0" y2="512" stroke="#6b7280" stroke-width="1.6" marker-end="url(#arrowdash)" stroke-dasharray="6 4"/>
+  <text x="397.5" y="506" text-anchor="middle" font-size="12" fill="#111827">14. 草稿待复核</text>
+  <line x1="295.0" y1="542" x2="90.0" y2="542" stroke="#6b7280" stroke-width="1.6" marker-end="url(#arrowdash)" stroke-dasharray="6 4"/>
+  <text x="192.5" y="536" text-anchor="middle" font-size="12" fill="#111827">15. 已入复核队列</text>
+</svg>

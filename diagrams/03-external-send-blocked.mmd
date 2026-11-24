@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    participant U as 发起人
+    participant F as 前端入口
+    participant R as Agent运行时
+    participant M as 模型服务
+    participant G as 工具网关
+    participant Q as 复核队列服务
+    participant H as 复核人
+    participant S as 消息出口
+    participant A as 审计记录器
+
+    U->>F: 通知会员
+    F->>R: 发起运行(身份/org_id/site_id)
+    R->>M: 规划
+    M-->>R: tool_call: message_send_external
+    R->>G: dispatch(external_send)
+    Note over G: 识别 external_send：绝不自动执行
+    G->>Q: 入队(保留身份/org_id/site_id/入参摘要)
+    Q-->>G: review_queue_id=RQ-DEMO-0007
+    G-->>R: PENDING_HUMAN_REVIEW (auto_executed=false)
+    R->>A: 记step: PENDING_HUMAN_REVIEW
+    R-->>F: 外发请求待人工复核
+    F-->>U: 已提交复核，未发送
+
+    Note over U,A: 以下为人工复核阶段——确认后才可发送
+    H->>Q: 查看外发请求
+    H->>Q: 确认发送
+    Q->>A: 记 REVIEW_CONFIRMED
+    Q->>S: 以发起人身份发送(org_id/site_id不变)
+    S-->>Q: SENT
+    Q->>A: 记发送结果
+    Q-->>F: 已发送
+    F-->>U: 通知已发送

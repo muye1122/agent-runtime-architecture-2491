@@ -1,0 +1,25 @@
+sequenceDiagram
+    autonumber
+    participant U as 发起人
+    participant F as 前端入口
+    participant R as Agent运行时
+    participant M as 模型服务
+    participant G as 工具网关
+    participant B as 业务接口
+    participant A as 审计记录器
+
+    U->>F: 查询订单状态
+    F->>R: 发起运行(身份/org_id/site_id)
+    R->>M: 规划(地址与密钥从环境变量读)
+    M-->>R: tool_call: order_lookup_read
+    R->>G: dispatch(read_only)
+    Note over G: 校验白名单 / 输入Schema / 权限点
+    G->>B: 查询订单(携带身份与范围)
+    B-->>G: status=PAID, amount来自业务接口
+    G-->>R: OK，金额原样返回
+    R->>A: 记step: 序号/工具/摘要/token/耗时/OK
+    R->>M: 生成回答(禁止计算金额)
+    M-->>R: 回答文本
+    R->>A: 记run结束: total_tokens/SUCCESS
+    R-->>F: 展示状态与业务金额
+    F-->>U: 查询结果
